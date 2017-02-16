@@ -1,0 +1,31 @@
+$back-color: #6fcc66;
+$color: #69c;
+
+header{
+  nav{
+  	width: 100%;
+  	border: 1px solid $color;
+    display: inline-flex;
+  	flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    img { 
+      width: 300px; 
+      height: 100px;
+  	}
+  	.menu-item{
+      margin-right: 30px;
+      display: inline-flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      .item-out{
+        margin-left: 25px;
+        }
+      .item-in{
+        margin-left: 25px;
+      }
+  	}
+  }
+}

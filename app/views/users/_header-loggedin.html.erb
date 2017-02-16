@@ -1,0 +1,14 @@
+<nav>
+  <img src="logo.jpg" class="menu-item" alt="application logo">
+  <div class="menu-item">
+    <a href="#" class="item-in">Your Spaces</a>
+    <a href="#" class="item-in">Your Sharing Searches</a>
+    <a href="#" class="item-in">Messages</a>
+    <a href="#" class="item-in">
+      <i class="fa fa-user-o" aria-hidden="true"></i>
+      Profile
+      <i class="fa fa-caret-down" aria-hidden="true"></i>
+    </a>
+    <%= link_to 'Logout!', destroy_user_session_path, method: 'DELETE', class: "item-in" %>
+  </div> 
+</nav>
