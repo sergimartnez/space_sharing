@@ -20,8 +20,14 @@ $(document).ready(function(){
     console.log("Scrolling! 3 --> " + scroll_start);
     if(scroll_start > 5) {
       $(".navbar-fixed-top").css('background-color', '#f0f0f0');
+      $(".navbar .container img").removeClass("normal-img");
+      $(".navbar .container img").addClass("reduced-img");
+      $(".navbar .container img").attr("src","reduced_dividup_logo.jpg");
     }else {
       $('.navbar-fixed-top').css('background-color', 'transparent');
+      $(".navbar .container img").removeClass("reduced-img");
+      $(".navbar .container img").addClass("normal-img");
+      $(".navbar .container img").attr("src","dividup_logo.png");
     }
   });
 

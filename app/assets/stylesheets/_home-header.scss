@@ -17,10 +17,15 @@ header{
     align-items: center;
     margin-bottom: 0px;
     .container{
-      img {
+      .normal-img {
         margin: 6px;
-        width: 200px; 
+        width: 200px;
         height: 100px;
+      }
+      .reduced-img {
+        margin: 2px;
+        width: 120px;
+        height: 45px;
       }
     }
     .item-out{

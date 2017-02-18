@@ -8,19 +8,26 @@ $color: #69c;
         width: 100%;
     }
     .how-it-works{
-        padding: 35px;
-        width: 100%;
-        text-align:center;
-        .share-spaces{
+        .how-section{
+            padding: 35px;
+            width: 100%;
+            text-align:center;
             .row{
+                margin: auto;
                 padding-top: 70px;
-                width: 100%;
-                i{
-                    color: $color;
-                    font-size: 68px;
+                width: 100%; 
+                .col{
+                    i{
+                        color: $color;
+                        font-size: 68px;
+                    }
+                    .share-spaces-text{
+                        margin-top: 20px;
+                    }
                 }
-                .share-spaces-text{
-                    margin-top: 40px;
+                .sing-up{
+                    float: none;
+                    margin: 0 auto;
                 }
             }
         }
