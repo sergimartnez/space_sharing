@@ -14,4 +14,15 @@ $(document).ready(function(){
     $('.login-modal').modal("show");
     $('.register-modal').modal("hide");
   });
+
+  $(document).scroll(function() {  
+    scroll_start = $(this).scrollTop();
+    console.log("Scrolling! 3 --> " + scroll_start);
+    if(scroll_start > 5) {
+      $(".navbar-fixed-top").css('background-color', '#f0f0f0');
+    }else {
+      $('.navbar-fixed-top').css('background-color', 'transparent');
+    }
+  });
+
 });

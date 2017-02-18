@@ -2,15 +2,26 @@ $back-color: #6fcc66;
 $color: #69c;
 
 .main-container{
+
     width: 100%;
     .landing-img {
         width: 100%;
     }
     .how-it-works{
+        padding: 35px;
         width: 100%;
+        text-align:center;
         .share-spaces{
             .row{
+                padding-top: 70px;
                 width: 100%;
+                i{
+                    color: $color;
+                    font-size: 68px;
+                }
+                .share-spaces-text{
+                    margin-top: 40px;
+                }
             }
         }
     }

@@ -2,7 +2,12 @@ $back-color: #6fcc66;
 $color: #69c;
 
 header{
+  top: 0;
   nav{
+    right: 0;
+    left: 0;
+    z-index: 1030;
+    position: fixed;
   	width: 100%;
   	border: 1px solid $color;
     display: inline-flex;
@@ -10,23 +15,16 @@ header{
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    img { 
-      width: 200px; 
-      height: 100px;
-      margin: 4px;
-  	}
-  	.menu-item{
-      margin-right: 30px;
-      display: inline-flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      .item-out{
-        margin-left: 25px;
-        }
-      .item-in{
-        margin-left: 25px;
+    margin-bottom: 0px;
+    .container{
+      img {
+        margin: 6px;
+        width: 200px; 
+        height: 100px;
       }
-  	}
+    }
+    .item-out{
+      margin: 10px;
+    }
   }
 }
