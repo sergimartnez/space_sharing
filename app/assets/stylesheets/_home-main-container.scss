@@ -14,12 +14,15 @@ $color: #69c;
             text-align:center;
             .row{
                 margin: auto;
-                padding-top: 70px;
+                padding-top: 50px;
                 width: 100%; 
                 .col{
                     i{
                         color: $color;
                         font-size: 68px;
+                    }
+                    .fa-sign-in{
+                        font-size: 38px;
                     }
                     .share-spaces-text{
                         margin-top: 20px;
@@ -30,6 +33,15 @@ $color: #69c;
                     margin: 0 auto;
                 }
             }
+            .sing-up-row{
+               padding: 5px; 
+            }
+        }
+        .search-and-share-section {
+            padding-top: 0px;
+        }
+        .sing-up-section {
+            padding-bottom: 0px;
         }
     }
 }

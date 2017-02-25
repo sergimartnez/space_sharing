@@ -1,0 +1,29 @@
+<div class="main-container-space-new">
+  <h1>Hi, <%= current_user.name %>!</h1>
+  <h1>Do you want to rent a space?</h1>
+  <h1>Lets create and publish it!</h1>
+  
+  <%= form_for [@my_space] do |f| %>
+    <div class="field">
+      <%= f.label :type_of_space %><br />
+      <%= f.collection_select :type_of_space, Space::TYPES, :to_s, :to_s, autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :space_capacity %><br />
+      <%= f.select :space_capacity, (0..20).map {|i| [i,i] }, autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :description %><br />
+      <%= f.text_field :description, autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label "Space dimension (m2)" %><br />
+      <%= f.select :space_dimensions, (4...32).step(2).map {|i| [i,i] }, autofocus: true %>
+    </div>
+    <br>
+    <%= f.button %>
+  <% end %>
+</div>

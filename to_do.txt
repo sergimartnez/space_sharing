@@ -1,0 +1,23 @@
+* Omniauth --> connect with facebook
+* roles and permissions --> pundit
+    - Mirar la carpeta policies
+
+* gem best_in_place (inline editor) --> gema para poder editar cosas en formulario
+                        pinchando
+                        En el Update del controlador para manejar esto:
+                        - Format.json
+                        - format.html
+
+* gem devise --> confirmable, etc, check all the different features!
+
+* ActionCable --> live chat
+
+---------------
+
+Gema para diagrama DB --> rails-erd, ruby graphviz, graphviz,
+
+create app operations & methods no associated with models --> under /lib
+
+Custom failure
+
+** Considerar tener una primera capa antes de users_controller (landing o algo asi) **

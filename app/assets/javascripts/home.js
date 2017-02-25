@@ -15,6 +15,18 @@ $(document).ready(function(){
     $('.register-modal').modal("hide");
   });
 
+  $(".share-spaces-button").click(function() {
+    $('html, body').animate({
+        scrollTop: $(".how-it-works").offset().top
+    }, 1200);
+  });
+
+  $(".rent-spaces-button").click(function() {
+    $('html, body').animate({
+        scrollTop: $(".rent-spaces-section").offset().top
+    }, 2000);
+  });
+
   $(document).scroll(function() {  
     scroll_start = $(this).scrollTop();
     console.log("Scrolling! 3 --> " + scroll_start);
@@ -22,7 +34,7 @@ $(document).ready(function(){
       $(".navbar-fixed-top").css('background-color', '#f0f0f0');
       $(".navbar .container img").removeClass("normal-img");
       $(".navbar .container img").addClass("reduced-img");
-      $(".navbar .container img").attr("src","reduced_dividup_logo.jpg");
+      $(".navbar .container img").attr("src","reduced_dividup_logo.png");
     }else {
       $('.navbar-fixed-top').css('background-color', 'transparent');
       $(".navbar .container img").removeClass("reduced-img");

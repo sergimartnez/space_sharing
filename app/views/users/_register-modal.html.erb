@@ -9,6 +9,7 @@
       <div class="modal-footer">
         <h5>Already have an account?</h5>
         <button type="button" class="btn btn-primary log-in-modal-button">Log In</button>
+        <p><% flash.each do |name, msg| -%> <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %> <%- end -%></p>
       </div>
     </div>
   </div>

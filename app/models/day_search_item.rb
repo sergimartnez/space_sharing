@@ -1,7 +1,6 @@
 class DaySearchItem < ApplicationRecord
 	belongs_to :search
 
-	serialize 	:array_of_desired_times, Array
 
 	def store_day_array_of_desired_times
 		day_array = Array.new(24, 0)

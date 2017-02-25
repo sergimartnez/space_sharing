@@ -16,6 +16,7 @@ User.create!(name: "Sergio",
              password_confirmation: "Andalucia45",
              email: "sergimartnez@yahoo.es")
 
+
 10.times do |n|
   name  = Faker::Name.first_name
   surname = Faker::Name.last_name
@@ -50,6 +51,11 @@ User.create!(name: "Sergio",
     day_search.store_day_array_of_desired_times
   end
   new_search.store_array_of_desired_times
+
+  #Create 2 spaces per user
+  type_of_space = "Garage"
+  new_garage = Space.create!(type_of_space: type_of_space,
+                    user: user)
 end
 
 5.times do |n|

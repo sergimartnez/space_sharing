@@ -4,6 +4,8 @@ class CreateSearches < ActiveRecord::Migration[5.0]
     	t.references 	:user, index: true
     	t.references	:space, index: true
     	t.string			:space_type
+      t.boolean     :active
+      t.text        :description
     	t.text				:array_of_desired_times
       t.timestamps
     end

@@ -8,4 +8,5 @@ class User < ApplicationRecord
 
   has_many :spaces
   has_many :searches
+  has_one  :address
 end

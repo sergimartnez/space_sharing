@@ -1,5 +1,5 @@
-<nav>
-  <img src="reduced_dividup_logo.jpg" class="normal-img menu-item" alt="application logo">
+<!-- <nav>
+  <img src="dividup_logo.png" class="normal-img menu-item" alt="application logo">
   <div class="menu-item">
     <a href="#" class="item-in">Your Spaces</a>
     <a href="#" class="item-in">Your Sharing Searches</a>
@@ -11,4 +11,28 @@
     </a>
     <%= link_to 'Logout!', destroy_user_session_path, method: 'DELETE', class: "item-in" %>
   </div> 
+</nav> -->
+
+<nav class="navbar navbar-fixed-top">
+  <div class="container">
+    <img src="dividup_logo.png" class="normal-img menu-item" alt="application logo">
+    <!-- <img src="dividup_logo.png" class="normal-img menu-item" alt="application logo">
+    <a href="#" class="item-out share-spaces-button">How It Works</a>
+    <a href="#" class="item-out rent-spaces-button">Rent Spaces</a>
+    <a href="#" class="item-out btn-primary btn-sm sign-up-button" data-toggle="modal">Sign Up</a>
+    <a href="#" class="item-out btn-primary btn-sm log-in-button">Log In</a> -->
+
+
+    <a href="#" class="item-in">Your Spaces</a>
+    <!-- <a href="#" class="item-in">Create Space</a> -->
+    <%= link_to "Create Space", "/spaces/new", class: "item-in" %>
+    <a href="#" class="item-in">Your Sharing Searches</a>
+    <a href="#" class="item-in">Messages</a>
+    <a href="#" class="item-in">
+      <i class="fa fa-user-o" aria-hidden="true"></i>
+      Profile
+      <i class="fa fa-caret-down" aria-hidden="true"></i>
+    </a>
+    <%= link_to 'Logout!', destroy_user_session_path, method: 'DELETE', class: "item-in" %>
+  </div>
 </nav>
