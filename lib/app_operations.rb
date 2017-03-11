@@ -38,7 +38,7 @@ class AppOperation
     (sum/(7.0*24))*100
   end
 
-  def self.obtain_array_of_desired_times search_id
+  def self.obtain_array_of_desired_times
     start_arr = start.split(':')
     finish_arr = finish.split(':')
     day_array = Array.new(24, 0)
@@ -55,6 +55,7 @@ class AppOperation
 
   def self.get_times_from_matrix matrix
     matrix.map do |day_array|
+      check=false
       prev_val=0
       day_array.each.with_index.inject("") do |mem, (val, ind)|
         if prev_val==0 && val==1
@@ -62,12 +63,17 @@ class AppOperation
             mem=mem + "From " + ind.to_s + ":00"
           else
             mem=mem + " and from " + ind.to_s + ":00"
+            check=true
           end
           prev_val = 1
         elsif prev_val==1 && val==0
           mem=mem + " to " + ind.to_s + ":00"
           prev_val = 0
+          check = false
         end
+        # if ind==23 && check==true
+        #   mem=mem + " to " + ind.to_s + ":00"
+        # end
         mem
       end
     end

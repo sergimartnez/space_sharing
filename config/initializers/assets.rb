@@ -12,7 +12,7 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w( home.js )
 Rails.application.config.assets.precompile += %w( new-search.js )
 Rails.application.config.assets.precompile += %w( new-space.js )
-Rails.application.config.assets.precompile += %w( show-space.js )
+Rails.application.config.assets.precompile += %w( show-map.js )
 Rails.application.config.assets.precompile += %w( slider.js )
 
 

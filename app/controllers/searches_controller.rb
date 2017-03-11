@@ -5,7 +5,11 @@ class SearchesController < ApplicationController
   end
 
   def show
-    @my_space = Search.find_by(id: params[:id])
+    @my_search = Search.find_by(id: params[:id])
+    gon.lat=@my_search.latitude
+    gon.long=@my_search.longitude
+    @my_search_times = AppOperation.get_times_from_matrix @my_search.array_of_desired_times
+    # binding.pry
   end
 
   def new
@@ -13,11 +17,11 @@ class SearchesController < ApplicationController
   end
 
   def create
-    @search = current_user.searches.new(space_type: params[])
+    @search = current_user.searches.new(search_params)
     if @search.save
       week_array = []
       Search::WEEK_DAYS.each do |week_day|
-        week_array.push(SearchOperations.store_day_array_of_desired_times(
+        week_array.push(SearchOperations.get_day_array_of_desired_times(
           Integer(params[:start_time]["#{week_day}"]), 
           Integer(params[:end_time]["#{week_day}"])
         ))
@@ -38,8 +42,7 @@ class SearchesController < ApplicationController
   end
 
   private
-
-  def space_params
+  def search_params
     params.require(:search).permit(
       :space_type,
       :title,

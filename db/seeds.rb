@@ -43,7 +43,7 @@ User.create!(name: "Sergio",
   week_array = []
 
   7.times do |i|
-    week_array.push(SearchOperations.store_day_array_of_desired_times(start_hour, end_hour))
+    week_array.push(SearchOperations.get_day_array_of_desired_times(start_hour, end_hour))
   end
   new_search.store_array_of_desired_times week_array
 
@@ -89,7 +89,7 @@ end
       end_hour = nil
       end_minute = nil
     end
-    week_array.push(SearchOperations.store_day_array_of_desired_times(start_hour, end_hour))
+    week_array.push(SearchOperations.get_day_array_of_desired_times(start_hour, end_hour))
   end
   new_search.store_array_of_desired_times week_array
 end

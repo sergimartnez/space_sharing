@@ -14,8 +14,8 @@ $(document).ready(function(){
   initialize();
   var actual_marker;
   $('.validate-address-button').on('click', function codeAddress() {
-    var address = $('#space_address_1').val() + $('#space_address_2').val() 
-    + ", " + $('#space_city').val() + $('#space_country').val();
+    var address = $('#search_address_1').val() + $('#search_address_2').val() 
+    + ", " + $('#search_city').val() + $('#search_country').val();
     if (actual_marker != null){
       DeleteMarkers();
     }
@@ -28,8 +28,8 @@ $(document).ready(function(){
         });
         map.setZoom(15);
         actual_marker=marker;
-        $('#space_longitude').val(results[0].geometry.location.lng());
-        $('#space_latitude').val(results[0].geometry.location.lat());
+        $('#search_longitude').val(results[0].geometry.location.lng());
+        $('#search_latitude').val(results[0].geometry.location.lat());
       } else {
         console.log("Geocode was not successful for the following reason: " + status);
       }
@@ -41,11 +41,11 @@ $(document).ready(function(){
     actual_marker=null;
   };
 
-  $('#space_full_availability').on('change', function(){
-    if ($('#space_full_availability').val() == "true") {
-      $('.space-availability-selectors').hide();
+  $('#search_full_availability').on('change', function(){
+    if ($('#search_full_availability').val() == "true") {
+      $('.search-availability-selectors').hide();
     } else {
-      $('.space-availability-selectors').show();
+      $('.search-availability-selectors').show();
     }
     
   });
