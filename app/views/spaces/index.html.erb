@@ -1,0 +1,12 @@
+<div class="main-container-spaces">
+  <% @my_spaces.each do |space| %>
+    <div class="index-space">
+      <h4><%= space.type_of_space %></h4>
+      <h4><%= link_to space.title, "/spaces/#{space.id}" %></h4>
+      <h6>Type: <%= space.type_of_space %></h6>
+      <h6>Space Capacity: <%= space.space_capacity %></h6>
+      <h6>Dimensions: <%= space.space_dimensions %> m2</h6>
+      <h6>Description: <%= space.description %></h6>
+    </div>
+  <% end %>
+</div>

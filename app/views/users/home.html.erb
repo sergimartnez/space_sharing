@@ -1,3 +1,4 @@
+
 <div class="main-container">
   <img src="landing.jpg" alt="landing" class="landing-img">
   <div class="how-it-works">
@@ -79,3 +80,7 @@
 <%= render "register-modal" %>
 
 <%= render "login-modal" %>
+
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "home.js" %>
+<% end %>

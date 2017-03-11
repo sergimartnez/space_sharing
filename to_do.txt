@@ -21,3 +21,5 @@ create app operations & methods no associated with models --> under /lib
 Custom failure
 
 ** Considerar tener una primera capa antes de users_controller (landing o algo asi) **
+
+gem ransack --> Search Engine

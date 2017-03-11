@@ -1,6 +1,5 @@
 class CustomFailure < Devise::FailureApp
   def redirect_url
-    binding.pry
     root_path
   end
 

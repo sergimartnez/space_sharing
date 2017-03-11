@@ -1,17 +1,14 @@
 class Search < ApplicationRecord
 	belongs_to 	:user
 	belongs_to 	:space, optional: true
-	has_many 		:day_search_items
 	has_one			:address
 	serialize 	:array_of_desired_times, Array
 
 	TYPES = ['Garage', 'Classroom', 'Fitness Room', 'Meetings Room', 'Rehearsal Space']
+	WEEK_DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
-	def store_array_of_desired_times
-		week_array = Array.new(7, 0)
-		self.day_search_items.each do |day_search|
-			self.array_of_desired_times.push(day_search.array_of_desired_times)
-		end
+	def store_array_of_desired_times array_searches
+		self.array_of_desired_times=array_searches
 		self.save
 	end
 
@@ -50,20 +47,4 @@ class Search < ApplicationRecord
 		result_matrix	
 	end
 
-	# from DaySearchItem
-	def store_day_array_of_desired_times
-		day_array = Array.new(24, 0)
-		if !self.end_hour.nil? & !self.start_hour.nil?
-			if self.end_hour < self.start_hour
-				day_array[self.start_hour..23] = [1]*((23)- self.start_hour)
-				if self.end_hour != 0
-					day_array[0..(self.end_hour - 1)] = [1]*(self.end_hour)
-				end
-			else
-				day_array[self.start_hour..(self.end_hour - 1)] = [1]*(self.end_hour-self.start_hour)
-			end
-		end
-		self.array_of_desired_times = day_array
-		self.save
-	end
 end

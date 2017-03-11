@@ -1,0 +1,9 @@
+<div class="main-container-searches">
+  <% @my_searches.each do |search| %>
+    <div class="index-search">
+      <h4><%= link_to search.title, "/searches/#{search.id}" %></h4>
+      <h6>Type: <%= search.space_type %></h6>
+      <h6>Description: <%= search.description %></h6>
+    </div>
+  <% end %>
+</div>

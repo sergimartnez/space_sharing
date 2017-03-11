@@ -3,10 +3,12 @@
   <head>
     <title>SpaceSharing</title>
     <%= csrf_meta_tags %>
-
+    <%= Gon::Base.render_data %>
+    <%= include_gon(:init => true) %>
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
-
+    <%= yield :javascript_includes %>
+    
   </head>
 
   <body>

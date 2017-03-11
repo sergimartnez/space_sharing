@@ -17,16 +17,19 @@ ActiveRecord::Schema.define(version: 20170221192952) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "garage_id"
+    t.integer  "space_id"
     t.integer  "search_id"
-    t.string   "address_first"
-    t.string   "address_second"
-    t.string   "street"
+    t.string   "address_1"
+    t.string   "address_2"
     t.string   "country"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.index ["garage_id"], name: "index_addresses_on_garage_id", using: :btree
+    t.string   "postal_code"
+    t.string   "province"
+    t.float    "longitude"
+    t.float    "latitude"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.index ["search_id"], name: "index_addresses_on_search_id", using: :btree
+    t.index ["space_id"], name: "index_addresses_on_space_id", using: :btree
     t.index ["user_id"], name: "index_addresses_on_user_id", using: :btree
   end
 
@@ -35,24 +38,22 @@ ActiveRecord::Schema.define(version: 20170221192952) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "day_search_items", force: :cascade do |t|
-    t.integer  "search_id"
-    t.string   "week_day"
-    t.integer  "start_hour"
-    t.integer  "start_minute"
-    t.integer  "end_hour"
-    t.integer  "end_minute"
-    t.text     "array_of_desired_times"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.index ["search_id"], name: "index_day_search_items_on_search_id", using: :btree
-  end
-
   create_table "searches", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "space_id"
     t.string   "space_type"
+    t.boolean  "active"
+    t.string   "title"
+    t.text     "description"
     t.text     "array_of_desired_times"
+    t.string   "address_1"
+    t.string   "address_2"
+    t.string   "country"
+    t.string   "postal_code"
+    t.string   "province"
+    t.float    "longitude"
+    t.float    "latitude"
+    t.string   "city"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.index ["space_id"], name: "index_searches_on_space_id", using: :btree
@@ -61,12 +62,24 @@ ActiveRecord::Schema.define(version: 20170221192952) do
 
   create_table "spaces", force: :cascade do |t|
     t.integer  "user_id"
+    t.string   "title"
     t.string   "type_of_space"
     t.text     "description"
     t.integer  "space_dimensions"
     t.integer  "space_capacity"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.boolean  "active"
+    t.string   "address_1"
+    t.string   "address_2"
+    t.string   "country"
+    t.string   "postal_code"
+    t.string   "province"
+    t.float    "longitude"
+    t.float    "latitude"
+    t.string   "city"
+    t.boolean  "full_availability"
+    t.text     "availability"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.index ["user_id"], name: "index_spaces_on_user_id", using: :btree
   end
 
@@ -83,6 +96,13 @@ ActiveRecord::Schema.define(version: 20170221192952) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "address_1"
+    t.string   "address_2"
+    t.string   "country"
+    t.string   "postal_code"
+    t.string   "province"
+    t.float    "longitude"
+    t.float    "latitude"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree

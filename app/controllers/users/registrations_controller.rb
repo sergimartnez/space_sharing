@@ -23,7 +23,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
         respond_with resource, location: after_inactive_sign_up_path_for(resource)
       end
     else
-      binding.pry
       clean_up_passwords resource
       resource.errors.full_messages.each {|x| flash[x] = x} # Rails 4 simple way
       redirect_to root_path

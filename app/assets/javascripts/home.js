@@ -5,6 +5,7 @@ $(document).ready(function(){
 
   $('.log-in-button').on('click', function(){
     $('.login-modal').modal("show");
+
   });
   $('.sign-up-modal-button').on('click', function(){
     $('.login-modal').modal("hide");
@@ -29,7 +30,6 @@ $(document).ready(function(){
 
   $(document).scroll(function() {  
     scroll_start = $(this).scrollTop();
-    console.log("Scrolling! 3 --> " + scroll_start);
     if(scroll_start > 5) {
       $(".navbar-fixed-top").css('background-color', '#f0f0f0');
       $(".navbar .container img").removeClass("normal-img");
@@ -42,5 +42,9 @@ $(document).ready(function(){
       $(".navbar .container img").attr("src","dividup_logo.png");
     }
   });
+
+  // if ($("#errors_sing_up").text() != ""){
+  //   $('.register-modal').modal("show");
+  // }
 
 });

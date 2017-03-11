@@ -4,8 +4,12 @@ Rails.application.routes.draw do
   root to: 'users#home'
   
   resources :spaces
+  resources :searches
 
+  devise_for :users, controllers: { sessions: "users/sessions", :registrations => "users/registrations" }
 
-  devise_for :users
+  devise_scope :user do 
+    get '/sign_up', to: 'users#home'
+  end
 
 end

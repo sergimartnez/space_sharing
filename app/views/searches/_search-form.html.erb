@@ -1,0 +1,77 @@
+<%= form_for(@my_search) do |f| %>
+  <!-- fieldsets -->
+  <div class="form-section">
+    <h2>What type of space you want to publish?</h2>
+    <h3>This is step 1</h3>
+    <div class="field">
+      <%= f.label :title %><br />
+      <%= f.text_field :title, autofocus: true %>
+    </div>
+    <div class="field">
+      <%= f.label :space_type %><br />
+      <%= f.collection_select :space_type, Space::TYPES, :to_s, :to_s, autofocus: true %>
+    </div>
+    <div class="field">
+      <%= f.label :description %><br />
+      <%= f.text_field :description, autofocus: true %>
+    </div>
+  </div> 
+  
+  <div class="form-section">
+    <h2>Let's give an address to your renting search!</h2>
+    <h3>This is step 2</h3>
+    <div class="field">
+      <%= f.label :country %><br />
+      <%= f.text_field :country, autofocus: true %>
+    </div>
+    <div class="field">
+      <%= f.label :address_1 %><br />
+      <%= f.text_field :address_1, autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :address_2 %><br />
+      <%= f.text_field :address_2, autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :city %><br />
+      <%= f.text_field :city, autofocus: true %>
+    </div>
+    <div class="field">
+      <%= f.label :postal_code %><br />
+      <%= f.text_field :postal_code, autofocus: true %>
+    </div>
+    <div class="field">
+      <%= f.label "Province/State" %><br />
+      <%= f.text_field :province, autofocus: true %>
+    </div>
+    <div class="field">
+      <%= f.hidden_field :longitude, autofocus: true %>
+    </div>
+    <div class="field">
+      <%= f.hidden_field :latitude, autofocus: true %>
+    </div>
+    <button type="button" class="btn-primary btn-sm validate-address-button">Validate Address</button>
+    <div id="map" style="width: 500px; height: 400px;"></div>
+  </div>
+
+  <div class="form-section">
+    <h2>Let's define your desired time slots for your renting search!</h2>
+    <h3>This is step 3</h3>
+    <div class="search-availability-selectors">
+      <% Search::WEEK_DAYS.each do |week_day| %>       
+        <h5><%= week_day %></h5>
+        <div class="field <%= week_day %>">
+          <p>
+            Price Range:<p id="time-range"></p>
+          </p>
+          <div id="slider-range"></div>
+          <input type="hidden" id="time-start" name=<%= "start_time[#{week_day}]" %> >
+          <input type="hidden" id="time-end" name=<%= "end_time[#{week_day}]" %> >
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <%= f.button %>
+<% end %>
