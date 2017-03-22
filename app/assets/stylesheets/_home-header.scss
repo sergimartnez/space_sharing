@@ -32,4 +32,18 @@ header{
       margin: 10px;
     }
   }
+  .nav-top{
+    background-color: transparent;
+    transition: background-color 1s;
+  
+  }
+  .nav-moving{
+    background-color: rgb(255, 255, 249);
+    transition: background-color 1s;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    filter: alpha(opacity=80);
+    -moz-opacity: 0.80;
+    -khtml-opacity: 0.8;
+    opacity: 0.8;
+  }
 }

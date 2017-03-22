@@ -8,7 +8,7 @@ class SearchesController < ApplicationController
     @my_search = Search.find_by(id: params[:id])
     gon.lat=@my_search.latitude
     gon.long=@my_search.longitude
-    @my_search_times = AppOperation.get_times_from_matrix @my_search.array_of_desired_times
+    @my_search_times = AppOperations.get_times_from_matrix @my_search.array_of_desired_times
     # binding.pry
   end
 
@@ -21,10 +21,12 @@ class SearchesController < ApplicationController
     if @search.save
       week_array = []
       Search::WEEK_DAYS.each do |week_day|
-        week_array.push(SearchOperations.get_day_array_of_desired_times(
-          Integer(params[:start_time]["#{week_day}"]), 
-          Integer(params[:end_time]["#{week_day}"])
-        ))
+        week_array.push(
+          SearchOperations.get_day_array_of_desired_times(
+            Integer(params[:start_time]["#{week_day}"]), 
+            Integer(params[:end_time]["#{week_day}"])
+          )
+        )
       end
       @search.store_array_of_desired_times week_array
       redirect_to "/searches/#{@search.id}"

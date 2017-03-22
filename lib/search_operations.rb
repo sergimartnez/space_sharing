@@ -2,9 +2,8 @@ class SearchOperations
 
   def self.get_day_array_of_desired_times start_hour, end_hour
     day_array = Array.new(24, 0)
-    
+    return day_array unless (start_hour!=nil && end_hour!=nil)
     if end_hour < start_hour
-      binding.pry
       if start_hour != 24
         day_array[start_hour..23] = [1]*((24)- start_hour)
       end

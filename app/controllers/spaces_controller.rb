@@ -14,7 +14,7 @@ class SpacesController < ApplicationController
     gon.lat=@space.latitude
     gon.long=@space.longitude
 
-    @space_availability = AppOperation.get_times_from_matrix @space.availability
+    @space_availability = AppOperations.get_times_from_matrix @space.availability
 
   end
 
@@ -27,22 +27,23 @@ class SpacesController < ApplicationController
     if @space.save
       if @space.full_availability == false
         week_array = []
-        binding.pry
+        
         Search::WEEK_DAYS.each do |week_day|
           week_array.push(
             SearchOperations.get_day_array_of_desired_times(
-              Integer(params[:end_time]["#{week_day}"]),
-              Integer(params[:start_time]["#{week_day}"])
+              Integer(params[:start_time]["#{week_day}"]),
+              Integer(params[:end_time]["#{week_day}"])
             )
           )
         end
 
-        @space.availability = AppOperation.reverse_matrix_values week_array
+        @space.availability = week_array
         @space.save
         
-        @search = Search.new(description: params[:description],
-                             space_type: params[:type_of_space],
-                             array_of_desired_times: week_array,
+        @search = Search.new(title: params[:space][:title],
+                             description: params[:space][:description],
+                             space_type: params[:space][:type_of_space],
+                             array_of_desired_times: AppOperations.reverse_matrix_values(week_array),
                              space: @space,
                              user: current_user)
         if @search.save

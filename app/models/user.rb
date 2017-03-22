@@ -9,4 +9,8 @@ class User < ApplicationRecord
   has_many :spaces
   has_many :searches
   has_one  :address
+
+  def get_full_name
+    self.name+" "+self.surname
+  end
 end

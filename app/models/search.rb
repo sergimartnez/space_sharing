@@ -1,3 +1,5 @@
+require 'app_operation'
+
 class Search < ApplicationRecord
 	belongs_to 	:user
 	belongs_to 	:space, optional: true
@@ -12,39 +14,28 @@ class Search < ApplicationRecord
 		self.save
 	end
 
-	def search_space_sharing_results user
-		combinations_of_users = get_combinations_of_users 3, user
-		search_results = []
-		combinations_of_users.each_with_index do |comb, index| 
-			result = get_compatibilities comb
-			if result != nil
-				percentage=TimeCompatibilityAppOp.get_percentage_of_compatibility result
-				comb_result = Hash.new
-				comb_result[:people] = parse_ids_to_names comb
-				comb_result[:percentage] = percentage
-				comb_result[:used_times] = TimeCompatibilityAppOp.get_times_from_matrix result
-				search_results.push(comb_result)
-			end
-		end
-		return search_results
+	def self.get_combinations_of_searches max_combination, current_user
+		(1..(max_combination-1)).flat_map{|size|
+			Search.all.ids.combination(size).find_all {|array| 
+				(array & current_user.searches.ids).empty?
+			}.uniq
+		}
 	end
 
-	def get_combinations_of_users max_combination, user
-		(2..max_combination).flat_map{|size| @@user_ids.combination(size).find_all{|array| (array.include? user.id)}.uniq}
-	end
-
-	def get_compatibilities comb
-		result_matrix = comb.reduce(nil) do |memo_matrix, user_id|
-			actual_user = @@users.find {|user| user.id==user_id}
-			actual_matrix = actual_user.desired_times_matrix
-			memo_matrix = TimeCompatibilityAppOp.sum_two_matrices memo_matrix, actual_matrix
-			valid = TimeCompatibilityAppOp.check_matrix_compatibility memo_matrix
+	def self.get_compatibilities comb, search_array
+		result_matrix = comb.reduce(nil) do |memo_matrix, search_id|
+			actual_matrix = Search.find_by(id: search_id).array_of_desired_times
+			memo_matrix = AppOperation.sum_two_matrices memo_matrix, actual_matrix
+			valid = AppOperation.check_matrix_compatibility memo_matrix
 			if !valid
 				return nil
 			end
 			memo_matrix
 		end
-		result_matrix	
+		result_matrix	= AppOperation.sum_two_matrices result_matrix, search_array
+		if AppOperation.check_matrix_compatibility result_matrix
+			return result_matrix
+		end
 	end
 
 end

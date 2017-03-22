@@ -1,0 +1,26 @@
+<div class="spot-search-main-container">
+  <form action="/spot-searching/results", method="GET">  
+    <div class="space-availability-selectors">
+      <% Search::WEEK_DAYS.each do |week_day| %>       
+        <h5><%= week_day %></h5>
+        <div class="field <%= week_day %>">
+          <p>
+            Time Slot:<p id="time-range"></p>
+          </p>
+          <div id="slider-range"></div>
+          <input type="hidden" id="time-start" name=<%= "start_time[#{week_day}]" %> >
+          <input type="hidden" id="time-end" name=<%= "end_time[#{week_day}]" %> >
+        </div>
+      <% end %>
+    </div>
+    <input type="submit" value="Search">
+  </form>
+</div>
+
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "slider.js" %>
+<% end %>
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>

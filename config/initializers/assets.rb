@@ -14,6 +14,7 @@ Rails.application.config.assets.precompile += %w( new-search.js )
 Rails.application.config.assets.precompile += %w( new-space.js )
 Rails.application.config.assets.precompile += %w( show-map.js )
 Rails.application.config.assets.precompile += %w( slider.js )
+Rails.application.config.assets.precompile += %w( searching-index.js )
 
 
 # Rails.application.config.assets.precompile += %w( users.css )

@@ -2,11 +2,32 @@ $back-color: #6fcc66;
 $color: #69c;
 
 .main-container{
-
     width: 100%;
-    .landing-img {
-        width: 100%;
+
+    .top-subcontainer{
+        height: 100%;
+        ul {
+            padding: 0;
+            list-style-type: none;
+            .landing-img {
+                width: 100%;
+            }
+            .inactive{
+                display: none;
+            }
+        }
+        .search-area{
+            margin: 10%;
+            position: absolute;
+            top: 140px;
+            .search-form{
+                .spot-search-box{
+                    width: 250px;
+                }
+            }
+        }
     }
+    
     .how-it-works{
         .how-section{
             padding: 35px;

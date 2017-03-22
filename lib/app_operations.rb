@@ -1,6 +1,6 @@
 require 'time'
 
-class AppOperation
+class AppOperations
   def self.sum_two_matrices matrix1, matrix2
     return matrix2 unless matrix1 != nil 
     mixed_matrix = matrix1.map.with_index do |array,i| 
@@ -20,12 +20,7 @@ class AppOperation
   end
 
   def self.check_matrix_compatibility matrix
-    matrix.each do |array|
-      if array.include? 2
-        return false
-      end
-    end
-    true
+    matrix.detect {|array| array.include? 2}
   end
   
   def self.get_percentage_of_compatibility matrix
@@ -53,29 +48,38 @@ class AppOperation
     desired_matrix = Array.new(7){day_array}
   end
 
+  def self.parse_ids_to_names array_ids
+    users_array = array_ids.map do |search_id|
+      Search.find_by(id: search_id).user.get_full_name
+    end
+  end
+
   def self.get_times_from_matrix matrix
     matrix.map do |day_array|
-      check=false
-      prev_val=0
-      day_array.each.with_index.inject("") do |mem, (val, ind)|
-        if prev_val==0 && val==1
+      get_times_from_daily_array day_array
+    end
+  end
+  def self.get_times_from_daily_array day_array
+    day_array.each.with_index.inject("") do |mem, (val, ind)|
+      if ind != 0
+        if day_array[ind-1]==0 && val==1
           if mem==""
             mem=mem + "From " + ind.to_s + ":00"
           else
             mem=mem + " and from " + ind.to_s + ":00"
             check=true
           end
-          prev_val = 1
-        elsif prev_val==1 && val==0
+        elsif day_array[ind-1]==1 && val==0
           mem=mem + " to " + ind.to_s + ":00"
-          prev_val = 0
-          check = false
+        elsif ind==23 && val==1
+          mem=mem + " to 24:00"
         end
-        # if ind==23 && check==true
-        #   mem=mem + " to " + ind.to_s + ":00"
-        # end
-        mem
+      else
+        if val==1
+          mem=mem + "From " + ind.to_s + ":00"
+        end
       end
+      mem
     end
   end
 end

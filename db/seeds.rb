@@ -77,17 +77,13 @@ end
       search = new_search
       week_day = week_days[i]
       start_hour = Faker::Number.between(0, 23)
-      start_minute = 0
       end_hour = Faker::Number.between(start_hour + 1, 23)
-      end_minute = 0
          
     else
       search = new_search
       week_day = week_days[i]
       start_hour = nil
-      start_minute = nil
       end_hour = nil
-      end_minute = nil
     end
     week_array.push(SearchOperations.get_day_array_of_desired_times(start_hour, end_hour))
   end

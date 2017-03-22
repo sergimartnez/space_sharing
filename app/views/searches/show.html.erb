@@ -5,7 +5,7 @@
   <h4>Description</h4>
   <h4><%= @my_search.description %></h4>
   <br>
-  <h4>Availability</h4>
+  <h4>Time slots when the user will use the space</h4>
   <% Search::WEEK_DAYS.each_with_index do |week_day, index| %>
     <h5><%= "#{week_day} --> #{@my_search_times[index]}" %></h5>
   <% end %>
