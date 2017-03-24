@@ -1,5 +1,6 @@
 require 'search_operations'
 require 'app_operations'
+require 'will_paginate/array'
 
 class SearchingController < ApplicationController
   
@@ -31,6 +32,9 @@ class SearchingController < ApplicationController
         @search_results.push(comb_result)
       end
     end
+    @total_results=@search_results.length
+    @search_results=@search_results.sort_by{|k| k[:percentage]}.reverse
+                                   .paginate(:page => params[:page], :per_page => 5)
     render layout: 'index'
   end
 end

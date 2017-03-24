@@ -1,28 +1,27 @@
 .searching-main-container {
-  margin-top: 150px;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  position: fixed;
+  height: 100%; 
+  width: 100%;
   .search-results{
-    overflow-y: scroll;
-    vertical-align: top;
-    display: inline-block;
+    float: left;
     height: 100%;
+    vertical-align: top; 
     width: 60%;
+    .search-result{
+      margin: 10px;
+      padding: 10px;
+      border: 1px solid black;
+    }
   }
   .map-search{
-    vertical-align: top;
-    height: 100%;
     width: 40%;
-    position: relative;
+    height: 100%;
+    vertical-align: top;
+    position: fixed;
+    top: 0;
+    right: 0;
     #map{
       width: 100%;
-      top: 0;
-      bottom: 0;
-      position: absolute;
-      height: 400px;
+      height: 100vh;
     }
   }
   

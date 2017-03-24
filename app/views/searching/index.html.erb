@@ -1,15 +1,22 @@
 <div class="searching-main-container">
-  <div class="search-results">    
+  <div class="search-results">
+    <div></div>
+    <h2>Results --> <%= @total_results %></h2>    
     <% @search_results.each do |result| %>
-      <h4 class="result"><%= (result[:people]).count %></h4>
-      <h4 class="result"><%= result[:people] %></h4>
-      <h4 class="result"><%= result[:percentage] %></h4>
+      <div class="search-result">
+        <h4 class="result"><%= result[:people] %></h4>
+        <h4 class="result"><%= result[:percentage] %></h4>
+      </div>
     <% end %> 
+    <%= will_paginate @search_results %>
   </div>
+
   <div class="map-search">
     <div id="map"></div>
   </div>
 </div>
+
+
 
 <% content_for :javascript_includes do %>
   <%= javascript_include_tag "searching-index.js" %>

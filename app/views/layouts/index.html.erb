@@ -12,13 +12,6 @@
   </head>
 
   <body>
-    <header>
-      <% if user_signed_in? %>
-        <%= render "searching/header-search-loggedin" %>
-      <% else %>
-        <%= render "searching/header-search-loggedout" %>
-      <% end %>
-    </header>
     <%= yield %>
   </body>
 </html>
