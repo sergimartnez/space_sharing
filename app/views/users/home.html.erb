@@ -8,10 +8,10 @@
     <div class="search-area">
       <h2>RENT THE PERFECT SPOT ONLY WHEN YOU NEED IT</h2>
       <h3>Cheap, Social and Friendly</h3>
-      <form class="search-form" action="/spot-searching/new" method="GET">
-        <input type="text" class="spot-search-box" placeholder="Where do you need yout spot?">
-        <input type="submit" value="Search">
-      </form>
+      <%= form_tag "/searches/new_searching", class: "search-form" do %>
+        <%= text_field_tag "search_around", nil, id: "autocomplete", class: "spot-search-box", placeholder: "Were do you need your spot?", required: true %>
+        <%= submit_tag "Search" %>
+      <% end %>
     </div>
   </div>
   <!-- <img src="landing.jpg" alt="landing" class="landing-img"> -->
@@ -98,3 +98,10 @@
 <% content_for :javascript_includes do %>
   <%= javascript_include_tag "home.js" %>
 <% end %>
+
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAv7a1XrJSqleGAzjwBh5OBLIzJ7co0L_0&libraries=places"
+        async defer></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> -->

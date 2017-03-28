@@ -1,9 +1,9 @@
 require 'pry'
 require 'gon'
-require 'search_operations'
 require 'app_operations'
 
 class SpacesController < ApplicationController
+  before_action :authenticate_user!
   
   def index
     @my_spaces=Space.where(user_id: current_user.id)

@@ -1,5 +1,10 @@
 <div class="spot-search-main-container">
-  <form action="/spot-searching/results", method="GET">  
+  <%= search_form_for @q do |f| %>
+    <%= hidden_field_tag :search_around, @search_around %> 
+    <div class="field">
+      <%= f.label :space_type %><br />
+      <%= f.collection_select :space_type_eq, Space::TYPES, :to_s, :to_s %>
+    </div>
     <div class="space-availability-selectors">
       <% Search::WEEK_DAYS.each do |week_day| %>       
         <h5><%= week_day %></h5>
@@ -13,8 +18,8 @@
         </div>
       <% end %>
     </div>
-    <input type="submit" value="Search">
-  </form>
+    <%= f.submit %>
+  <% end %>
 </div>
 
 <% content_for :javascript_includes do %>

@@ -69,7 +69,10 @@ $(document).ready(function(){
       $(".navbar .container img").attr("src","dividup_logo.png");
     }
   });
-
+  new google.maps.places.Autocomplete(
+  (document.getElementById('autocomplete')), {
+    types: ['geocode']
+  });
   // TO-DO manage the sing-in sign-up errors
 
   // if ($("#errors_sing_up").text() != ""){

@@ -1,7 +1,41 @@
 require 'time'
 
 class AppOperations
-  def self.sum_two_matrices matrix1, matrix2
+  def self.get_compatible_combinations_of_elements searches_list, search_array
+    # (1..2).flat_map{|size|
+      comb_list = []
+      hashes_list = []
+      searches_list.combination(2).each do |search_comb|
+        compatible_matrix = valid_combination?(search_comb)
+        if compatible_matrix
+          comb_list.push(search_comb)
+
+          comb_result = Hash.new
+          result_matrix = sum_matrices(compatible_matrix, search_array)
+          percentage=get_percentage_of_compatibility result_matrix
+          comb_result[:people]=[search_comb[0].user.name, search_comb[1].user.name]
+          comb_result[:search_ids]=[search_comb[0].id, search_comb[1].id]
+          comb_result[:percentage]=percentage
+          comb_result[:used_times]=get_times_from_matrix result_matrix
+          hashes_list.push(comb_result)
+        end
+      end.uniq
+      return [comb_list, hashes_list]
+    # }
+  end
+
+  def self.valid_combination? array
+    return true unless array.length > 1
+    if array.length == 2
+      compatible_matrix = array[0].is_compatible?(array[1].array_of_desired_times) 
+      if compatible_matrix != nil && (array[0].space.nil? || array[1].space.nil?)
+        return compatible_matrix
+      end
+    end
+    nil
+  end
+
+  def self.sum_matrices matrix1, matrix2
     return matrix2 unless matrix1 != nil 
     mixed_matrix = matrix1.map.with_index do |array,i| 
       array.map.with_index do |item, j|
@@ -33,19 +67,20 @@ class AppOperations
     (sum/(7.0*24))*100
   end
 
-  def self.obtain_array_of_desired_times
-    start_arr = start.split(':')
-    finish_arr = finish.split(':')
+  def self.get_day_array_of_desired_times start_hour, end_hour
     day_array = Array.new(24, 0)
-    if finish_arr[0].to_i < start_arr[0].to_i
-      day_array[(start_arr[0].to_i)..23] = [1]*((23)-(start_arr[0].to_i))
-      if finish_arr[0].to_i != 0
-        day_array[0..(finish_arr[0].to_i - 1)] = [1]*(finish_arr[0].to_i)
+    return day_array unless (start_hour!=nil && end_hour!=nil)
+    if end_hour < start_hour
+      if start_hour != 24
+        day_array[start_hour..23] = [1]*((24)- start_hour)
+      end
+      if end_hour != 0
+        day_array[0..(end_hour - 1)] = [1]*(end_hour)
       end
     else
-      day_array[(start_arr[0].to_i)..(finish_arr[0].to_i - 1)] = [1]*((finish_arr[0].to_i)-(start_arr[0].to_i))
+      day_array[start_hour..(end_hour - 1)] = [1]*(end_hour-start_hour)
     end
-    desired_matrix = Array.new(7){day_array}
+    day_array
   end
 
   def self.parse_ids_to_names array_ids

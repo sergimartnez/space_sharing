@@ -1,13 +1,21 @@
-require 'app_operation'
+require 'app_operations'
 
 class Search < ApplicationRecord
 	belongs_to 	:user
 	belongs_to 	:space, optional: true
+	belongs_to  :shared_rental, optional: true
 	has_one			:address
 	serialize 	:array_of_desired_times, Array
 
+	geocoded_by :full_address
+	after_validation :geocode
+
 	TYPES = ['Garage', 'Classroom', 'Fitness Room', 'Meetings Room', 'Rehearsal Space']
 	WEEK_DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+
+	def full_address
+		[country, city, address_1, address_2].compact.join(',')
+	end
 
 	def store_array_of_desired_times array_searches
 		self.array_of_desired_times=array_searches
@@ -38,4 +46,12 @@ class Search < ApplicationRecord
 		end
 	end
 
+	def is_compatible? desired_array
+		result_times_matrix = AppOperations.sum_matrices self.array_of_desired_times, desired_array
+		if AppOperations.check_matrix_compatibility result_times_matrix
+			return nil
+		else
+			return result_times_matrix
+		end
+	end
 end

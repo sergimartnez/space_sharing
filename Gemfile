@@ -13,6 +13,9 @@ gem 'faker'
 gem 'font-awesome-rails'
 gem 'gon'
 gem "paperclip", "~> 5.0.0"
+# gem 'kaminari'
+gem 'ransack'
+gem 'geocoder'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.1'

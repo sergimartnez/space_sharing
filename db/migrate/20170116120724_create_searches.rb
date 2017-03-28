@@ -13,6 +13,7 @@ class CreateSearches < ActiveRecord::Migration[5.0]
       t.string      :country
       t.string      :postal_code
       t.string      :province
+      t.text        :address
       t.float       :longitude
       t.float       :latitude
       t.string      :city
