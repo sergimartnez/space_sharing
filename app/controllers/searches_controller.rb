@@ -19,6 +19,7 @@ class SearchesController < ApplicationController
   end
 
   def create
+
     @search = current_user.searches.new(search_params)
     if @search.save
       week_array = []
@@ -51,15 +52,20 @@ class SearchesController < ApplicationController
   end
 
   def results
-
-    week_array=[]
-    Search::WEEK_DAYS.each do |week_day|
-      week_array.push(
-        AppOperations.get_day_array_of_desired_times(
-          Integer(params[:start_time]["#{week_day}"]),
-          Integer(params[:end_time]["#{week_day}"])
+    @week_array=[]
+    if params[:search_array]
+      7.times do |i|
+        @week_array.push(params[:search_array][i].split(" ").map(&:to_i))
+      end
+    else
+      Search::WEEK_DAYS.each do |week_day|
+        @week_array.push(
+          AppOperations.get_day_array_of_desired_times(
+            Integer(params[:start_time]["#{week_day}"]),
+            Integer(params[:end_time]["#{week_day}"])
+          )
         )
-      )
+      end
     end
     
     searches = Search.all # Filter the active ones and non owned by requester
@@ -73,12 +79,12 @@ class SearchesController < ApplicationController
     @q = searches.ransack(params[:q])
     @search_results = @q.result(distinct: true)
     # Filter results by compatibility with the search requested
-    @search_results = @search_results.select{ |search| !search.is_compatible?(week_array).nil? }
+    @search_results = @search_results.select{ |search| !search.is_compatible?(@week_array).nil? }
     
-    search_combinations = AppOperations.get_compatible_combinations_of_elements(@search_results, week_array)
+    search_combinations = AppOperations.get_compatible_combinations_of_elements(@search_results, @week_array)
     # @search_results.push(*search_combinations)
     @print = search_combinations[1]
-    binding.pry
+    # binding.pry
     render layout: 'index'
 
     # VERSION 1 !!

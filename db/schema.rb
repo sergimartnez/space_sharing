@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170328171958) do
+ActiveRecord::Schema.define(version: 20170328224530) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,9 +33,22 @@ ActiveRecord::Schema.define(version: 20170328171958) do
     t.index ["user_id"], name: "index_addresses_on_user_id", using: :btree
   end
 
-  create_table "app_operations", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "chatrooms", force: :cascade do |t|
+    t.integer  "shared_rental_id"
+    t.string   "topic"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["shared_rental_id"], name: "index_chatrooms_on_shared_rental_id", using: :btree
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "chatroom_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["chatroom_id"], name: "index_messages_on_chatroom_id", using: :btree
+    t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
   end
 
   create_table "searches", force: :cascade do |t|
@@ -120,4 +133,7 @@ ActiveRecord::Schema.define(version: 20170328171958) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "chatrooms", "shared_rentals"
+  add_foreign_key "messages", "chatrooms"
+  add_foreign_key "messages", "users"
 end

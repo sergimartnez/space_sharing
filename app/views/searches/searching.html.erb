@@ -26,6 +26,12 @@
   <%= javascript_include_tag "slider.js" %>
 <% end %>
 
+<% content_for :view_specific_css do %>
+  <%= stylesheet_link_tag "_spot-search-main-container" %>
+  <%= stylesheet_link_tag "_home-footer" %>
+  <%= stylesheet_link_tag "_home-header" %>
+<% end %>
+
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>

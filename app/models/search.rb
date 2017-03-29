@@ -22,6 +22,15 @@ class Search < ApplicationRecord
 		self.save
 	end
 
+	def is_compatible? desired_array
+		result_times_matrix = AppOperations.sum_matrices self.array_of_desired_times, desired_array
+		if AppOperations.check_matrix_compatibility result_times_matrix
+			return nil
+		else
+			return result_times_matrix
+		end
+	end
+
 	def self.get_combinations_of_searches max_combination, current_user
 		(1..(max_combination-1)).flat_map{|size|
 			Search.all.ids.combination(size).find_all {|array| 

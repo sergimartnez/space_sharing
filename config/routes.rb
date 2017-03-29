@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :spaces
   resources :searches, only: [:show, :new, :create, :update, :edit, :update]
 
-  get '/searches/my_searches', to: 'searches#my_searches'
+  get '/searches/my-searches', to: 'searches#my_searches'
 
   devise_for :users, controllers: { sessions: "users/sessions", :registrations => "users/registrations" }
 
@@ -17,6 +17,14 @@ Rails.application.routes.draw do
     get '/sign_up', to: 'users#home'
   end
 
-  get '/shared_rental/show', to: 'shared_rentals#show'
+  get '/shared-rental/view', to: 'shared_rentals#view'
+
+  # Serve websocket cable requests in-process
+  mount ActionCable.server => '/cable'
+
+  resources :chatrooms, param: :slug
+  resources :messages
+
+  get '/users/:id', to: 'users#show'
 
 end

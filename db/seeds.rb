@@ -9,6 +9,7 @@ require 'faker'
 require 'set'
 
 week_days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+avatars_array = ["boy-avatar.jpg", "girl-avatar.jpg"]
 
 User.create!(name: "Sergio",
              surname: "Martínez de Tejada",
@@ -23,11 +24,13 @@ User.create!(name: "Sergio",
   email = Faker::Internet.email
   password = Faker::Internet.password(8, 8)
   password_confirmation = password
+  avatar = File.new("#{Rails.root}/public/#{avatars_array.sample}")
   new_user = User.create!(name: name,
                    surname: surname,
                    password: password,
                    password_confirmation: password_confirmation,
-                   email: email)
+                   email: email,
+                   avatar: avatar)
 
   space_type = Space::TYPES.sample
   user = new_user
@@ -62,11 +65,13 @@ end
   email = Faker::Internet.email
   password = Faker::Internet.password(8, 8)
   password_confirmation = password
+  avatar = File.new("#{Rails.root}/public/#{avatars_array.sample}")
   new_user = User.create!(name: name,
                surname: surname,
                password: password,
                password_confirmation: password_confirmation,
-               email: email)
+               email: email,
+               avatar: avatar)
 
   space_type = Space::TYPES.sample
   user = new_user

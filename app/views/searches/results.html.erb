@@ -7,21 +7,31 @@
         <%= f.label :space_type %>
         <%= f.collection_select :space_type_eq, Space::TYPES, :to_s, :to_s %>
       </div>
+      <% 7.times do |i| %>
+        <%= hidden_field_tag "search_array[]", @week_array[i] %>
+      <% end %>
 
       <%= f.submit %>
     <% end %>
-    <% @print.each do |comb| %>
-      <div class="search-result"> 
-        <h4>Share with: <%=comb[:people]%></h4>
-        <h4>Percentage: <%=comb[:percentage]%></h4>
-        <%= form_tag '/shared_rental/show' do %>
-          <% comb[:search_ids].each do |id| %>
-            <%= hidden_field :search_ids, :multiple => true, :value => id %>
-          <% end %>
-        <% end %>
-               
-      </div>
-    <% end %> 
+    <% if @print.any? %>
+      <% @print.each do |comb| %>
+        <div class="search-result"> 
+          <h4>Share with: <%=comb[:people]%></h4>
+          <h4>Percentage: <%=comb[:percentage]%></h4>
+          <%= form_tag '/shared-rental/view', method: 'get' do %>
+            <% comb[:search_ids].each do |id| %>
+              <%= hidden_field_tag "search_ids[]", id %>
+            <% end %>
+            <% 7.times do |i| %>
+              <%= hidden_field_tag "search_array[]", @week_array[i] %>
+            <% end %>
+            <%= submit_tag "View details!", class: "view-rental-details" %>
+          <% end %>                 
+        </div>
+      <% end %>
+    <% else %>
+      <h2>No results found!</h2>
+    <% end %>
   </div>
 
   <div class="map-search">
@@ -31,6 +41,12 @@
 
 <% content_for :javascript_includes do %>
   <%= javascript_include_tag "searching-index.js" %>
+<% end %>
+
+<% content_for :view_specific_css do %>  
+  <%= stylesheet_link_tag "_header" %>
+  <%= stylesheet_link_tag "_searching-main-container" %>
+  <%= stylesheet_link_tag "_home-footer" %> 
 <% end %>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAv7a1XrJSqleGAzjwBh5OBLIzJ7co0L_0"

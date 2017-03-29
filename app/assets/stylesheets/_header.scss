@@ -1,0 +1,49 @@
+$back-color: #6fcc66;
+$color: #69c;
+
+header{
+  top: 0;
+  nav{
+    // right: 0;
+    // left: 0;
+    // z-index: 1030;
+    // position: fixed;
+  	width: 100%;
+  	border: 1px solid $color;
+    display: inline-flex;
+  	flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0px;
+    .container{
+      .normal-img {
+        margin: 6px;
+        width: 200px;
+        height: 100px;
+      }
+      .reduced-img {
+        margin: 2px;
+        width: 120px;
+        height: 45px;
+      }
+    }
+    .item-out{
+      margin: 10px;
+    }
+  }
+  // .nav-top{
+  //   background-color: transparent;
+  //   transition: background-color 1s;
+  
+  // }
+  // .nav-moving{
+  //   background-color: rgb(255, 255, 249);
+  //   transition: background-color 1s;
+  //   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  //   filter: alpha(opacity=80);
+  //   -moz-opacity: 0.80;
+  //   -khtml-opacity: 0.8;
+  //   opacity: 0.8;
+  // }
+}

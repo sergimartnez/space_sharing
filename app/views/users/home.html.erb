@@ -95,6 +95,16 @@
 
 <%= render "login-modal" %>
 
+<% content_for :view_specific_css do %>
+  <%= stylesheet_link_tag "_home-footer" %>
+  <%= stylesheet_link_tag "_home-header" %>
+  <%= stylesheet_link_tag "_home-main-container" %>
+  <%= stylesheet_link_tag "_user-login-form" %>
+  <%= stylesheet_link_tag "_user-register-form" %>
+  <%= stylesheet_link_tag "_home-main-container" %>
+
+<% end %>
+
 <% content_for :javascript_includes do %>
   <%= javascript_include_tag "home.js" %>
 <% end %>

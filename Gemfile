@@ -11,11 +11,13 @@ gem 'pry'
 gem 'devise'
 gem 'faker'
 gem 'font-awesome-rails'
+gem 'bootstrap', '~> 4.0.0.alpha3'
 gem 'gon'
 gem "paperclip", "~> 5.0.0"
 # gem 'kaminari'
 gem 'ransack'
 gem 'geocoder'
+gem 'redis', '~> 3.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.1'

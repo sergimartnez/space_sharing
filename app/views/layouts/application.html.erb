@@ -5,21 +5,26 @@
     <%= csrf_meta_tags %>
     <%= Gon::Base.render_data %>
     <%= include_gon(:init => true) %>
-    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= stylesheet_link_tag    'application' %>
     <%= javascript_include_tag 'application' %>
+    <%= yield :view_specific_css %>
     <%= yield :javascript_includes %>
+
+    <%= action_cable_meta_tag %>
     
   </head>
 
   <body>
-    <header>
-      <% if user_signed_in? %>
-        <%= render "users/header-loggedin" %>
-      <% else %>
-        <%= render "users/header-loggedout" %>
-      <% end %>
-    </header>
-    <%= yield %>
+    <div class="wrapper">
+      <header>
+        <% if user_signed_in? %>
+          <%= render "users/header-home-loggedin" %>
+        <% else %>
+          <%= render "users/header-home-loggedout" %>
+        <% end %>
+      </header>
+      <%= yield %>
+    </div>
     <%= render "users/footer" %>
   </body>
 </html>

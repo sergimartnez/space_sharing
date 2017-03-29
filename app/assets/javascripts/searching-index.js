@@ -7,4 +7,9 @@ $(document).ready(function(){
     var map=new google.maps.Map(document.getElementById("map"),mapProp);
   }
   initMap();
+
+  $('.view-rental-details').submit(function(){
+    
+  });
+
 });
