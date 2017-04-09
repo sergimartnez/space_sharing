@@ -2,8 +2,8 @@ require 'app_operations'
 
 class Search < ApplicationRecord
 	belongs_to 	:user
-	belongs_to 	:space, optional: true
-	belongs_to  :shared_rental, optional: true
+	belongs_to 	:space
+	belongs_to  :shared_rental
 	has_one			:address
 	serialize 	:array_of_desired_times, Array
 

@@ -1,5 +1,5 @@
 class Address < ApplicationRecord
-  belongs_to :user, optional: true
-  belongs_to :space, optional: true
-  belongs_to :search, optional: true
+  belongs_to :user
+  belongs_to :space
+  belongs_to :search
 end
