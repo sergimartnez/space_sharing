@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SpaceSharing</title>
+    <%= csrf_meta_tags %>
+    <%= Gon::Base.render_data %>
+    <%= include_gon(:init => true) %>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <%= yield :javascript_includes %>
+    <%= yield :view_specific_css %>
+    
+  </head>
+
+  <body>
+    <header>
+      <% if user_signed_in? %>
+        <%= render "users/header-loggedin" %>
+      <% else %>
+        <%= render "users/header-loggedout" %>
+      <% end %>
+    </header>
+    <%= yield %>
+    <%= render "users/footer" %>
+  </body>
+</html>

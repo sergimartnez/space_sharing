@@ -30,7 +30,7 @@ class SpacesController < ApplicationController
         
         Search::WEEK_DAYS.each do |week_day|
           week_array.push(
-            SearchOperations.get_day_array_of_desired_times(
+            AppOperations.get_day_array_of_desired_times(
               Integer(params[:start_time]["#{week_day}"]),
               Integer(params[:end_time]["#{week_day}"])
             )

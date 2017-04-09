@@ -1,10 +1,25 @@
+require 'app_operations'
+require 'gon'
+
 class SharedRentalsController < ApplicationController
   def view
-    binding.pry
+    
     redirect_to(:root) if params[:search_ids].nil?
     # @chatroom = Chatroom.new
     @renting_partners = User.joins(:searches).where("searches.id IN (?)", params[:search_ids])
-    @shared_searches = Search.where("id IN (?)", params[:search_ids])
+    @print_info = []
+    gon.coords = []
+    Search.where("id IN (?)", params[:search_ids]).each do |shared_search|
+      info = Hash.new
+      info[:person]=shared_search.user
+      info[:search]=shared_search
+      info[:desired_times]=AppOperations.get_times_from_matrix shared_search.array_of_desired_times
+
+      gon.coords.push([shared_search.longitude, shared_search.latitude])
+      @print_info.push(info)
+    end
+
+    render layout: 'normal-header'
   end
 
   def create

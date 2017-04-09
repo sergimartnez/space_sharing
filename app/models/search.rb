@@ -55,8 +55,8 @@ class Search < ApplicationRecord
 		end
 	end
 
-	def is_compatible? desired_array
-		result_times_matrix = AppOperations.sum_matrices self.array_of_desired_times, desired_array
+	def is_compatible? requested_times_array
+		result_times_matrix = AppOperations.sum_matrices self.array_of_desired_times, requested_times_array
 		if AppOperations.check_matrix_compatibility result_times_matrix
 			return nil
 		else

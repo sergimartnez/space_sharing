@@ -1,27 +1,44 @@
 require 'time'
 
 class AppOperations
-  def self.get_compatible_combinations_of_elements searches_list, search_array
-    # (1..2).flat_map{|size|
-      comb_list = []
-      hashes_list = []
-      searches_list.combination(2).each do |search_comb|
-        compatible_matrix = valid_combination?(search_comb)
-        if compatible_matrix
-          comb_list.push(search_comb)
+  def self.get_compatible_combinations_of_elements searches_list, requested_search_array
+    comb_list = []
+    hashes_list = []
+    coords_list = []
+    (1..2).each{|size|
+      searches_list.combination(size).each do |search_comb|
+        puts "yeah 1"
+        if size > 1 
+          compatible_matrix = valid_combination?(search_comb)
+          if compatible_matrix
+            comb_list.push(search_comb)
 
+            comb_result = Hash.new
+            result_matrix = sum_matrices(compatible_matrix, requested_search_array)
+            percentage=get_percentage_of_compatibility result_matrix
+            comb_result[:people]=[search_comb[0].user.name, search_comb[1].user.name]
+            comb_result[:search_ids]=[search_comb[0].id, search_comb[1].id]
+            comb_result[:percentage]=percentage
+            comb_result[:used_times]=get_times_from_matrix result_matrix
+            hashes_list.push(comb_result)
+          end
+        else
+          puts "yeah --> #{search_comb[0].longitude}"
+          comb_list.push(search_comb)
           comb_result = Hash.new
-          result_matrix = sum_matrices(compatible_matrix, search_array)
+          result_matrix = sum_matrices(search_comb[0].array_of_desired_times, requested_search_array)
           percentage=get_percentage_of_compatibility result_matrix
-          comb_result[:people]=[search_comb[0].user.name, search_comb[1].user.name]
-          comb_result[:search_ids]=[search_comb[0].id, search_comb[1].id]
+          comb_result[:people]=[search_comb[0].user.name]
+          comb_result[:search_ids]=[search_comb[0].id]
           comb_result[:percentage]=percentage
           comb_result[:used_times]=get_times_from_matrix result_matrix
           hashes_list.push(comb_result)
+          coords_list.push([search_comb[0].longitude, search_comb[0].latitude])
         end
       end.uniq
-      return [comb_list, hashes_list]
-    # }
+      
+    }
+    return [comb_list, hashes_list, coords_list]
   end
 
   def self.valid_combination? array

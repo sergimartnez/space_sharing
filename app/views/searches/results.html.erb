@@ -13,8 +13,8 @@
 
       <%= f.submit %>
     <% end %>
-    <% if @print.any? %>
-      <% @print.each do |comb| %>
+    <% if @print_results.any? %>
+      <% @print_results.each do |comb| %>
         <div class="search-result"> 
           <h4>Share with: <%=comb[:people]%></h4>
           <h4>Percentage: <%=comb[:percentage]%></h4>

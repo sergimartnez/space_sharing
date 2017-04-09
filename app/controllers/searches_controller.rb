@@ -54,10 +54,12 @@ class SearchesController < ApplicationController
   def results
     @week_array=[]
     if params[:search_array]
+      # User is re-doing the search
       7.times do |i|
         @week_array.push(params[:search_array][i].split(" ").map(&:to_i))
       end
     else
+      # New search from home view
       Search::WEEK_DAYS.each do |week_day|
         @week_array.push(
           AppOperations.get_day_array_of_desired_times(
@@ -67,24 +69,37 @@ class SearchesController < ApplicationController
         )
       end
     end
+
+    # Filter the active ones and non owned by requester
+    searches = Search.ransack(active_eq: true).result
     
-    searches = Search.all # Filter the active ones and non owned by requester
+    if current_user
+      searches = searches.ransack(user_id_not_eq: current_user.id).result
+    end               
     
+    # Flter the results by geolocation --> 15 km distance max
     if params[:search_around]
       @search_around = params[:search_around]
-      coords = Geocoder.coordinates(@search_around)
-      searches = searches.near([coords[1], coords[0]], 25, :units => :km)
+      coords_req = Geocoder.coordinates(@search_around)
+      searches = searches.near([coords_req[1], coords_req[0]], 15, :units => :km)
     end
 
+    # Filter by any other attributes --> space_type
     @q = searches.ransack(params[:q])
     @search_results = @q.result(distinct: true)
-    # Filter results by compatibility with the search requested
-    @search_results = @search_results.select{ |search| !search.is_compatible?(@week_array).nil? }
     
+
+    # Filter results by compatibility (time) with the search being requested
+    @search_results = @search_results.select{ |search| !search.is_compatible?(@week_array).nil? }
+    puts "yeah 0"
     search_combinations = AppOperations.get_compatible_combinations_of_elements(@search_results, @week_array)
+    puts "yeah 2"
     # @search_results.push(*search_combinations)
-    @print = search_combinations[1]
+    @print_results = search_combinations[1]
     # binding.pry
+    gon.marker_locations = search_combinations[2]
+    binding.pry
+    gon.coords_req = coords_req
     render layout: 'index'
 
     # VERSION 1 !!
